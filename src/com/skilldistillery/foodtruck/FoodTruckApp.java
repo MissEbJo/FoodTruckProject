@@ -11,16 +11,16 @@ public class FoodTruckApp {
 		System.out.println("Welcome to Better Elp");
 		System.out.println("To determine what you're going to eat for dinner, please follow the prompts!");
 		
-//		boolean keepGoing = true;
+		boolean keepGoing = true;
 		
-		while(true) {
+		while(keepGoing) {
 			
 			System.out.print("Please enter the name of the food truck: ");
 			String truckName = input.nextLine();
 			
 			if(truckName.equals("quit")) {
 				continue;
-			} break;
+			} 
 			
 			System.out.print("Please enter the food type of the food truck: ");
 			String foodType = input.nextLine();
@@ -35,8 +35,9 @@ public class FoodTruckApp {
 			
 			
 			
+			
 		
-		while(true) {
+		while(keepGoing) {
 		System.out.println("************************************************");
 		System.out.println("-----1. Display all available food trucks:-------");
 		System.out.println("------2. View average Rating of Food Trucks:-----");
@@ -73,7 +74,7 @@ public class FoodTruckApp {
 				}
 			}else if (choice == 4) {
 //				quit
-				break;
+				keepGoing = false;
 			}
 		
 	}
