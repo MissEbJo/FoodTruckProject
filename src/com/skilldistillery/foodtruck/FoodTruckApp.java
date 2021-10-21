@@ -12,6 +12,7 @@ public class FoodTruckApp {
 		System.out.println("Welcome to Better Elp");
 		System.out.println("To determine what you're going to eat for dinner, please follow the prompts!");
 
+		
 		boolean keepGoing = true;
 		boolean keepGoing1 = true;
 		int count = 0;
