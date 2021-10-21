@@ -7,19 +7,22 @@ public class FoodTruckApp {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		FoodTruck[] foodTrucks = new FoodTruck[5];
+		FoodTruckApp app = new FoodTruckApp();
 
 		System.out.println("Welcome to Better Elp");
 		System.out.println("To determine what you're going to eat for dinner, please follow the prompts!");
 
 		boolean keepGoing = true;
+		boolean keepGoing1 = true;
+		int count = 0;
 
 		while (keepGoing) {
-
 			System.out.print("Please enter the name of the food truck: ");
 			String truckName = input.nextLine();
 
 			if (truckName.equals("quit")) {
-				continue;
+				keepGoing = false;
+				break;
 			}
 
 			System.out.print("Please enter the food type of the food truck: ");
@@ -29,66 +32,68 @@ public class FoodTruckApp {
 			double truckRating = input.nextDouble();
 			input.nextLine();
 
-			FoodTruck internals = new FoodTruck(truckName, foodType, truckRating);
+			FoodTruck internalsOfFoodTrucks = new FoodTruck(truckName, foodType, truckRating);
 
-			System.out.println(internals);
+			foodTrucks[count] = internalsOfFoodTrucks;
+			count++;
+		}
+//			
 
-			while (keepGoing) {
-				System.out.println("************************************************");
-				System.out.println("-----1. Display all available food trucks:-------");
-				System.out.println("------2. View average Rating of Food Trucks:-----");
-				System.out.println("-------3. View the highest rated Food Truck:------");
-				System.out.println("-----------4. Quit the program.------------------");
-				System.out.println("************************************************");
+		while (keepGoing1) {
 
-				System.out.println("Please select an option: ");
-				int choice = input.nextInt();
+			System.out.println("************************************************");
+			System.out.println("-----1. Display all available food trucks:-------");
+			System.out.println("------2. View average Rating of Food Trucks:-----");
+			System.out.println("-------3. View the highest rated Food Truck:------");
+			System.out.println("-----------4. Quit the program.------------------");
+			System.out.println("************************************************");
 
-				if (choice == 1) {
-					// list all existing food truck
+			System.out.println("Please select an option: ");
+			int choice = input.nextInt();
 
-					internals.displayFoodTruck();
+			if (choice == 1) {
+				// list all existing food truck
 
-				} else if (choice == 2) {
+				for (FoodTruck foodTruck : foodTrucks) {
+					if (foodTruck != null) {
+						System.out.println(foodTruck);
+					}
+				}
+			} else if (choice == 2) {
 //				avg rating of food truck
 
-					double sum = 0;
-					for (int i = 0; i < foodTrucks.length; i++) {
-						sum = sum + truckRating;
-						sum = sum / foodTrucks.length;
-						System.out.println("The avg rating of the food trucks is: " + sum);
+				double sum = 0;
+				int count1 = 0;
+				double average = 0;
+				for (FoodTruck foodTruck : foodTrucks) {
+					if (foodTruck != null) {
+						sum = sum + foodTruck.getTruckRating();
+						count1++;
 					}
-				} else if (choice == 3) {
-//				display highest rated 
-					int max = 0;
-					truckName = "";
-					
-					for(int i =0; i < foodTrucks.length; i++) {
-						if (foodTrucks[i] == null) {
-							continue;
-						}
-						else if (foodTrucks[i].getTruckRating() > max) {
-							max = (int) foodTrucks[i].getTruckRating();
-							truckName = foodTrucks[i].getTruckName();
-						}
-							
-						System.out.println("The highest rated food truck: " + truckName + " with a rating of "+ max);
-					}
-//					FoodTruck max = foodTrucks[0];
-//					for (int i = 1; i < foodTrucks.length; i++) {
-//						if (foodTrucks[i].getTruckRating() > max.getTruckRating()) {
-//							max = foodTrucks[i];
-//						}
-//					}
-//					System.out.println("The highest rated food truck: " + max);
-//				} 
-				}else if (choice == 4) {
-//				quit
-					keepGoing = false;
 				}
-
+				average = sum / count1;
+				System.out.println("The avg rating of the food trucks is: " + average);
+			} else if (choice == 3) {
+//				display highest rated 
+				int max = 0;
+				int i = 0;
+				int count3 = 0;
+				String maxTruck = "";
+				for (i = 0; i < foodTrucks.length; i++) {
+					if (foodTrucks[i] == null) {
+						continue;
+					} else if (foodTrucks[i].getTruckRating() > max) {
+						maxTruck = foodTrucks[i].getTruckName();
+						max = (int) foodTrucks[i].getTruckRating();
+						count3++;
+					}
+				}
+				System.out.println("The highest rated food truck: " + maxTruck + " with a rating of " + max);
+			} else if (choice == 4) {
+//				quit
+				System.out.println("Thank you for using Better Elp! Enjoy your meal!");
+				keepGoing1 = false;
 			}
-
 		}
 	}
 }
